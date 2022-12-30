@@ -1,3 +1,5 @@
+// const webpack = require("webpack")
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -15,7 +17,9 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: [
+    '~/assets/css/main.css'
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
@@ -27,6 +31,14 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
+
+    // jQuery
+    // new webpack.ProvidePlugin({
+    //   $: 'jquery',
+    //   jQuery: 'jquery',
+    //   'window.jQuery': 'jquery'
+    // }),
+
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules

@@ -1,0 +1,128 @@
+/* COLORS */
+:root {
+    --red: rgba(192, 34, 46, 1);
+    --red-opac-80: rgba(192, 34, 46, .8);
+    --dark: rgba(25, 28, 31, 1);
+    --dark-grey: rgba(34, 43, 49, 1);
+    --white: rgba(255, 255, 255, 1);
+    --dimmed-white: rgba(196, 196, 196, 1);
+}
+
+/* BASE */
+
+html, body {
+    background: var(--dark-grey);
+    color: var(--white);
+}
+
+/* NAVBAR */
+
+nav.navbar {
+    height: 90px!important;
+    background: var(--red)!important;
+}
+
+#search_bar {
+    height: 50px;
+    width: 100%;
+    border-radius:20px;
+}
+
+/* SIDEBAR */
+
+@media (min-width: 992px) {
+    .sidebar {
+        background: var(--dark);
+        color: var(--white);
+        width: calc(2/12*100vw);
+    }
+    .sidebar_active {
+        background: var(--dark-grey);
+        pointer-events: none;
+        cursor: none;
+    }
+    .sidebar a {
+        height: 60px;
+    }
+
+    .sidebar a:hover, .sidebar a:focus, .sidebar a:active {
+        /* background: var(--dark-grey); */
+        height: 60px;
+    }
+}
+
+/* MOVIES */
+
+.movies {
+    width: 100vw;
+}
+
+@media (min-width: 992px) {
+    .movies {
+        width: calc(10/12*100vw);
+    }
+    .movies_wrapper {
+        width: calc(8/12*100vw);
+    }
+}
+
+/* FOOTER */
+
+.footer {
+    background: var(--red);
+    height: 228px;
+}
+
+.page-link {
+    background: none;
+    border: none;
+    color: var(--red);
+    padding: 0 inherit;
+}
+
+.page-item.disabled .page-link {
+    background: none;
+    border: none;
+    color: var(--dimmed-white);
+}
+
+.page-item.active .page-link {
+    background: var(--red);
+    color: var(--white);
+} 
+
+.page-link:hover, .page-link:focus, .page-link:active {
+    background: none;
+    color: var(--red-opac-80);
+}
+
+/* .page-direction:hover, .page-direction:focus, .page-direction:active {
+    background: none;
+    color: var(--red-opac-80);
+} */
+
+.mov_img {
+    border-radius: 20px;
+}
+
+.btn_action {
+    border-radius: 20px;
+    background: var(--red)!important;
+}
+
+.btn_action:hover, .btn_action:active, .btn_action:focus  {
+    background: var(--red-opac-80);
+    color: var(--dimmed-white);
+}
+
+a:hover, a:active, a:focus {
+    text-decoration: none;
+}
+
+.page_active {
+    background: var(--red);
+    color: var(--white)!important;
+    padding: 2px 10px!important;
+    border-radius: 50%;
+    border: none;
+}
