@@ -1,6 +1,10 @@
 // const webpack = require("webpack")
 
 export default {
+  target: "static",
+  router: {
+    base: '/cinemakuy/'
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'cinemakuy',
