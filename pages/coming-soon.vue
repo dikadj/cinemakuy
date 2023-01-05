@@ -3,7 +3,7 @@
       <AppHeader />
       <div class="d-flex">
         <SideBar pageActive="/cinemakuy/coming-soon" />
-        <UpcomingResults />
+        <MovResults activePage="upcoming" />
       </div>
       <AppFooter />
     </div>
