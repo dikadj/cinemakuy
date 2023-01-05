@@ -9,8 +9,8 @@
                     <h3 class="mb-4">{{ movie.Title }} ({{ movie.Rated ? movie.Rated.replace("TV-", "").replace("PG-", "") : movie.Rated }}+)</h3>
                     <div class="d-flex">
                         <div>
-                            <div class="mov d-flex justify-content-center align-items-center overflow-hidden mov_img">
-                                <img :src="movie.Poster" :alt="movie.Title" height="110%">
+                            <div class="mov d-flex justify-content-center align-items-center overflow-hidden mov_img" style="width: 300px;">
+                                <img :src="movie.Poster" :alt="movie.Title" width="330px">
                             </div>
                         </div>
                         <div class="ml-4 mr-5 d-flex flex-column justify-content-between">
@@ -71,7 +71,7 @@
                 const sourceText = this.movie.Plot
                 const sourceLang = 'en'
                 const targetLang = 'id'
-                // console.log(sourceText);
+                // console.log(this.movie);
                 
                 // Translate Synopsis to bahasa Indonesia
                 axios.get(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sourceLang}&tl=${targetLang}&dt=t&q=${encodeURI(sourceText)}`, { 'Accept': 'application/json' }).then((res) => {
@@ -86,8 +86,35 @@
                 // Movie Details
                 await axios.get(`https://www.omdbapi.com/?apikey=271ab1b1&i=${this.$route.params.id}`, { headers: { 'Accept': 'application/json' } })
                 .then((res) => {
-                    this.movie = res.data
-                    // console.log(res.data)                
+                    // console.log(res.data.Response)
+                    if (res.data.Response === "True") {
+                        this.movie = res.data
+                        // console.log(res.data)
+                    } else {
+                        // console.log(this.$route.params.id)
+                        axios.get(`https://api.themoviedb.org/3/movie/${this.$route.params.id}?api_key=d1cb8307b2e2ea609451dc1aa7ac7996&language=en-US`, { "Accept": "application/json" })
+                        .then((res) => {
+                            // console.log(res.data)
+                            this.movie = {
+                                Title: res.data.title,
+                                imdbID: res.data.id,
+                                Rated: "13",
+                                Poster: "https://image.tmdb.org/t/p/original" + res.data.poster_path,
+                                Released: res.data.release_date,
+                                Language: res.data.original_language,
+                                Genre: res.data.genre_ids,
+                                Actors: "",
+                                Writer: "",
+                                Director: "",
+                                Runtime: res.data.runtime,
+                                Plot: res.data.overview
+                            }
+                            // this.synopsis = res.data.overview
+                        })
+                        .then(() => {
+                            this.handleTranslate()
+                        })
+                    }
                 })
                 .then(() => {
                     this.handleTranslate()

@@ -1,14 +1,14 @@
 <template>
     <div>
       <nav class="navbar">
-        <div class="container-fluid">
-          <div class="row w-100">
+        <div class="container-fluid d-block">
+          <div class="row">
             <div class="col-6 col-lg-2">
               <nuxt-link class="navbar-brand mx-2" to="/"><img src="../assets/img/logo.png" alt="CINEMAKUY"></nuxt-link>
             </div>
             <div class="col-6 col-lg-5">
-              <form class="" role="search" action="" method="post">
-                <input id="search_bar" class="form-control px-4" type="search" name="search" placeholder="Search Title / Theatre Here" aria-label="Search">
+              <form class="" role="search" :action="'/s/' + searchQuery" method="post">
+                <input id="search_bar" class="form-control px-4" type="search" name="search" placeholder="Search Title / Theatre Here" aria-label="Search" :value="searchQuery" @input="inputSearch">
                 <button class="btn btn-outline-success" type="submit" hidden>Search</button>
               </form>
             </div>
@@ -25,5 +25,17 @@
   <script>
   export default {
     name: "AppHeader",
+    data() {
+      return {
+        searchQuery: "",
+      }
+    },
+    methods: {
+      inputSearch(e) {
+        this.searchQuery = e.target.value
+        // this.$router.replace({ path: this.searchQuery })
+        // this.$router.push({ path: this.searchQuery })
+      }
+    }
   }
   </script>

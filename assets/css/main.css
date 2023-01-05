@@ -70,7 +70,15 @@ nav.navbar {
 
 .footer {
     background: var(--red);
-    height: 228px;
+    height: auto;
+    padding: 1.5rem 0;
+}
+
+@media (min-width: 992px) {
+    .footer {
+        height: 228px;
+        padding: 0;
+    }
 }
 
 .page-link {
@@ -125,4 +133,44 @@ a:hover, a:active, a:focus {
     padding: 2px 10px!important;
     border-radius: 50%;
     border: none;
+}
+
+.pagination_number {
+    width: 36px; 
+    height: 36px; 
+    border-radius: 50%;
+    color: var(--red);
+}
+
+.pagination_number:hover, .pagination_number:focus, .pagination_number:active {
+    color: var(--red-opac-80);
+}
+
+.pagination_number.current_page {
+    background: var(--red);
+    color: var(--white);
+    pointer-events: none;
+}
+
+.pagination_number.current_page:hover, .pagination_number.current_page:focus, .pagination_number.current_page:active {
+    background-color: var(--red-opac-80);
+    color: rgba(255,255,255,.8);
+}
+
+.pagination_dots {
+    color: var(--red);
+}
+
+.pagination_direction {
+    height: 36px;
+    color: var(--red);
+}
+
+.pagination_direction:hover, .pagination_direction:focus, .pagination_direction:active {
+    color: var(--red-opac-80);
+}
+
+.pagination_direction_off {
+    color: rgba(255,255,255,.6);
+    pointer-events: none;
 }

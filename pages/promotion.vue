@@ -2,8 +2,8 @@
   <div>
     <AppHeader />
     <div class="d-flex">
-      <SideBar pageActive="/cinemakuy/" />
-      <MovResults />
+      <SideBar pageActive="/cinemakuy/promotion" />
+      <h1>This is a promotion page.</h1>
     </div>
     <AppFooter />
   </div>
@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: "NowPlayingPage",
+  name: "HomePage",
   head() {
     return {
       title: "CINEMAKUY | Find movies & theatre you love",

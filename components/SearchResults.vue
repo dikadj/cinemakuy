@@ -22,36 +22,36 @@
                 </div>
                 <div class="d-flex justify-content-center my-5">
                     <nav aria-label="..." class="d-flex">
-                        <nuxt-link :to="'/p/' + (parseInt(currentPage) - 1)" :class="'mx-2 d-flex justify-content-center align-items-center pagination_direction ' + (parseInt(currentPage) === 1 ? 'pagination_direction_off' : '')">
+                        <nuxt-link :to="'/s/' + sQuery + '/' + (parseInt(currentPage) - 1)" :class="'mx-2 d-flex justify-content-center align-items-center pagination_direction ' + (parseInt(currentPage) === 1 ? 'pagination_direction_off' : '')">
                             Sebelumnya
                         </nuxt-link>
-                        <nuxt-link to="/p/1" :class="'mx-2 d-flex justify-content-center align-items-center pagination_number ' + (parseInt(currentPage) === 1 ? 'current_page' : '')">
+                        <nuxt-link :to="'/s/' + sQuery + '/' + '1'" :class="'mx-2 d-flex justify-content-center align-items-center pagination_number ' + (parseInt(currentPage) === 1 ? 'current_page' : '')">
                             1
                         </nuxt-link>
                         <div :class="'mx-2 pagination_dots ' + (currentPage <= 2 ? 'd-none' : '')">
                             <span>...</span>
                         </div>
                         <div class="d-flex">
-                            <nuxt-link :to="'/p/' + (getCurrentPage(currentPage))"
-                            :class="'mx-2 d-flex justify-content-center align-items-center pagination_number ' + (parseInt(currentPage) === parseInt(getCurrentPage(currentPage)) ? 'current_page' : '')">
-                                {{ getCurrentPage(currentPage) }}
+                            <nuxt-link :to="'/s/' + sQuery + '/' + (parseInt(getCurrentPage(currentPage)))"
+                            :class="'mx-2 justify-content-center align-items-center pagination_number ' + (parseInt(currentPage) === parseInt(parseInt(getCurrentPage(currentPage))) ? 'current_page ' : '') + (parseInt(totalPages) <= 2 ? 'd-none' : 'd-flex')">
+                                {{ parseInt(getCurrentPage(currentPage)) }}
                             </nuxt-link>
-                            <nuxt-link :to="'/p/' + (parseInt(getCurrentPage(currentPage)) + 1)"
-                            :class="'mx-2 d-flex justify-content-center align-items-center pagination_number ' + (parseInt(currentPage) === parseInt(parseInt(getCurrentPage(currentPage) + 1)) ? 'current_page' : '')">
+                            <nuxt-link :to="'/s/' + sQuery + '/' + (parseInt(getCurrentPage(currentPage)) + 1)"
+                            :class="'mx-2 justify-content-center align-items-center pagination_number ' + (parseInt(currentPage) === parseInt(parseInt(getCurrentPage(currentPage) + 1)) ? 'current_page ' : '') + (parseInt(totalPages) <= 3 ? 'd-none' : 'd-flex')">
                                 {{ parseInt(getCurrentPage(currentPage)) + 1 }}
                             </nuxt-link>
-                            <nuxt-link :to="'/p/' + (parseInt(getCurrentPage(currentPage)) + 2)"
-                            :class="'mx-2 d-flex justify-content-center align-items-center pagination_number ' + (parseInt(currentPage) === parseInt(parseInt(getCurrentPage(currentPage) + 2)) ? 'current_page' : '')">
-                                {{ parseInt(getCurrentPage(currentPage)) + 2 }}
+                            <nuxt-link :to="'/s/' + sQuery + '/' + ((parseInt(getCurrentPage(currentPage)) + 2) === 2 ? 2 : currentPage)"
+                            :class="'mx-2 justify-content-center align-items-center pagination_number ' + (parseInt(currentPage) === ((parseInt(getCurrentPage(currentPage)) + 2) === 2 ? 2 : currentPage) ? 'current_page ' : '') + (parseInt(totalPages) <= 4 ? 'd-none' : 'd-flex')">
+                                {{ (parseInt(getCurrentPage(currentPage)) + 2) === 2 ? 2 : currentPage }}
                             </nuxt-link>
                         </div>
                         <div :class="'mx-2 pagination_dots ' + (parseInt(currentPage) >= (parseInt(totalPages) - 3) ? 'd-none' : '')">
                             <span>...</span>
                         </div>
-                        <nuxt-link :to="'/p/' + totalPages" :class="'mx-2 d-flex justify-content-center align-items-center pagination_number ' + (parseInt(currentPage) === parseInt(totalPages) ? 'current_page' : '')">
+                        <nuxt-link :to="'/s/' + sQuery + '/' + totalPages" :class="'mx-2 justify-content-center align-items-center pagination_number ' + (parseInt(currentPage) === parseInt(totalPages) ? 'current_page ' : '') + (parseInt(totalPages) < 2) ? 'd-none' : 'd-flex'">
                             {{ totalPages }}
                         </nuxt-link>
-                        <nuxt-link :to="'/p/' + (parseInt(currentPage) + 1)" :class="'mx-2 d-flex justify-content-center align-items-center pagination_direction ' + (parseInt(currentPage) === parseInt(totalPages) ? 'pagination_direction_off' : '')">
+                        <nuxt-link :to="'/s/' + sQuery + '/' + (parseInt(currentPage) + 1)" :class="'mx-2 d-flex justify-content-center align-items-center pagination_direction ' + (parseInt(currentPage) === parseInt(totalPages) ? 'pagination_direction_off' : '')">
                             Selanjutnya
                         </nuxt-link>
                     </nav>
@@ -72,7 +72,7 @@ export default {
             moviesNext: {},
             totalPages: 0,
             currentPage: 1,
-            activePage: "now_playing"
+            sQuery: ""
         }
     },
     methods: {
@@ -85,15 +85,17 @@ export default {
     },
     async created() {
 
+        this.sQuery = this.$route.params.query
+        console.log(this.sQuery)
         this.currentPage = (this.$route.params.page ? this.$route.params.page : 1)
         
         try {
             
-            // Now Playing
+            // Search
 
             // const page = parseInt(this.currentPage)
 
-            await axios.get(`https://api.themoviedb.org/3/movie/${this.activePage}?api_key=d1cb8307b2e2ea609451dc1aa7ac7996&language=en-US&page=${parseInt(this.currentPage)}`, { headers: { "Accept": "application/json" } })
+            await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=d1cb8307b2e2ea609451dc1aa7ac7996&language=en-US&include_adult=false&query=${this.sQuery}&page=${this.currentPage}`, { headers: { "Accept": "application/json" } })
 
             .then((res) => {
                 const np = []
@@ -136,7 +138,7 @@ export default {
             })
 
             // get next page
-            await axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=d1cb8307b2e2ea609451dc1aa7ac7996&language=en-US&page=${(parseInt(this.currentPage)+1)}`, { headers: { "Accept": "application/json" } })
+            await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=d1cb8307b2e2ea609451dc1aa7ac7996&language=en-US&include_adult=false&query=${this.sQuery}&page=${parseInt(this.currentPage)+1}`, { headers: { "Accept": "application/json" } })
 
             .then((res) => {
 
@@ -153,7 +155,7 @@ export default {
                 
             })
             
-            // console.log(this.currentPage)
+            console.log(this.totalPages)
             // console.log(this.movies)
             // console.log(`https://api.themoviedb.org/3/movie/now_playing?api_key=d1cb8307b2e2ea609451dc1aa7ac7996&language=en-US&page=${(parseInt(this.currentPage)+1)}`)
             // console.log(this.$route.params.page)

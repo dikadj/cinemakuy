@@ -22,25 +22,25 @@
                 </div>
                 <div class="d-flex justify-content-center my-5">
                     <nav aria-label="..." class="d-flex">
-                        <nuxt-link :to="'/p/' + (parseInt(currentPage) - 1)" :class="'mx-2 d-flex justify-content-center align-items-center pagination_direction ' + (parseInt(currentPage) === 1 ? 'pagination_direction_off' : '')">
+                        <nuxt-link :to="'/c/' + (parseInt(currentPage) - 1)" :class="'mx-2 d-flex justify-content-center align-items-center pagination_direction ' + (parseInt(currentPage) === 1 ? 'pagination_direction_off' : '')">
                             Sebelumnya
                         </nuxt-link>
-                        <nuxt-link to="/p/1" :class="'mx-2 d-flex justify-content-center align-items-center pagination_number ' + (parseInt(currentPage) === 1 ? 'current_page' : '')">
+                        <nuxt-link to="/c/1" :class="'mx-2 d-flex justify-content-center align-items-center pagination_number ' + (parseInt(currentPage) === 1 ? 'current_page' : '')">
                             1
                         </nuxt-link>
                         <div :class="'mx-2 pagination_dots ' + (currentPage <= 2 ? 'd-none' : '')">
                             <span>...</span>
                         </div>
                         <div class="d-flex">
-                            <nuxt-link :to="'/p/' + (getCurrentPage(currentPage))"
-                            :class="'mx-2 d-flex justify-content-center align-items-center pagination_number ' + (parseInt(currentPage) === parseInt(getCurrentPage(currentPage)) ? 'current_page' : '')">
+                            <nuxt-link :to="'/c/' + (getCurrentPage(currentPage))"
+                            :class="'mx-2 d-flex justify-content-center align-items-center pagination_number ' + (parseInt(currentPage) === parseInt(getCurrentPage(currentPage)) && parseInt(currentPage) !== 1 ? 'current_page' : '')">
                                 {{ getCurrentPage(currentPage) }}
                             </nuxt-link>
-                            <nuxt-link :to="'/p/' + (parseInt(getCurrentPage(currentPage)) + 1)"
+                            <nuxt-link :to="'/c/' + (parseInt(getCurrentPage(currentPage)) + 1)"
                             :class="'mx-2 d-flex justify-content-center align-items-center pagination_number ' + (parseInt(currentPage) === parseInt(parseInt(getCurrentPage(currentPage) + 1)) ? 'current_page' : '')">
                                 {{ parseInt(getCurrentPage(currentPage)) + 1 }}
                             </nuxt-link>
-                            <nuxt-link :to="'/p/' + (parseInt(getCurrentPage(currentPage)) + 2)"
+                            <nuxt-link :to="'/c/' + (parseInt(getCurrentPage(currentPage)) + 2)"
                             :class="'mx-2 d-flex justify-content-center align-items-center pagination_number ' + (parseInt(currentPage) === parseInt(parseInt(getCurrentPage(currentPage) + 2)) ? 'current_page' : '')">
                                 {{ parseInt(getCurrentPage(currentPage)) + 2 }}
                             </nuxt-link>
@@ -48,10 +48,10 @@
                         <div :class="'mx-2 pagination_dots ' + (parseInt(currentPage) >= (parseInt(totalPages) - 3) ? 'd-none' : '')">
                             <span>...</span>
                         </div>
-                        <nuxt-link :to="'/p/' + totalPages" :class="'mx-2 d-flex justify-content-center align-items-center pagination_number ' + (parseInt(currentPage) === parseInt(totalPages) ? 'current_page' : '')">
+                        <nuxt-link :to="'/c/' + totalPages" :class="'mx-2 d-flex justify-content-center align-items-center pagination_number ' + (parseInt(currentPage) === parseInt(totalPages) ? 'current_page' : '')">
                             {{ totalPages }}
                         </nuxt-link>
-                        <nuxt-link :to="'/p/' + (parseInt(currentPage) + 1)" :class="'mx-2 d-flex justify-content-center align-items-center pagination_direction ' + (parseInt(currentPage) === parseInt(totalPages) ? 'pagination_direction_off' : '')">
+                        <nuxt-link :to="'/c/' + (parseInt(currentPage) + 1)" :class="'mx-2 d-flex justify-content-center align-items-center pagination_direction ' + (parseInt(currentPage) === parseInt(totalPages) ? 'pagination_direction_off' : '')">
                             Selanjutnya
                         </nuxt-link>
                     </nav>
@@ -65,14 +65,14 @@
 import axios from "axios"
 
 export default {
-    name: "MovResults",
+    name: "UpcomingResults",
     data() {
         return {
             movies: [],
             moviesNext: {},
             totalPages: 0,
             currentPage: 1,
-            activePage: "now_playing"
+            activePage: "upcoming"
         }
     },
     methods: {

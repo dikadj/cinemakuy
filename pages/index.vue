@@ -2,7 +2,7 @@
   <div>
     <AppHeader />
     <div class="d-flex">
-      <SideBar />
+      <SideBar pageActive="/cinemakuy/" />
       <MovResults />
     </div>
     <AppFooter />
