@@ -1,0 +1,1 @@
+window.__NUXT__=(function(a){return {staticAssetsBase:"\u002Fcinemakuy\u002F_nuxt\u002Fstatic\u002F1672932988",layout:"default",error:a,serverRendered:true,routePath:"\u002Fpromotion",config:{_app:{basePath:"\u002Fcinemakuy\u002F",assetsPath:"\u002Fcinemakuy\u002F_nuxt\u002F",cdnURL:a}}}}(null));
