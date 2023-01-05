@@ -1,7 +1,7 @@
 // const webpack = require("webpack")
 
 export default {
-  target: "static",
+  target: 'static',
   router: {
     base: '/cinemakuy/'
   },
@@ -19,6 +19,12 @@ export default {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
+
+  // Generate
+  // generate: {
+  //   // crawler: false,
+  //   // concurrency: 500,
+  // },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [

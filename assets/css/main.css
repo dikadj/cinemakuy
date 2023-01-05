@@ -139,11 +139,13 @@ a:hover, a:active, a:focus {
     width: 36px; 
     height: 36px; 
     border-radius: 50%;
+    box-shadow: none;
     color: var(--red);
 }
 
 .pagination_number:hover, .pagination_number:focus, .pagination_number:active {
     color: var(--red-opac-80);
+    box-shadow: none;
 }
 
 .pagination_number.current_page {

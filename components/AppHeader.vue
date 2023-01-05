@@ -36,6 +36,11 @@
         // this.$router.replace({ path: this.searchQuery })
         // this.$router.push({ path: this.searchQuery })
       }
+    },
+    created() {
+      if (this.$route.params.query !== undefined) {
+        this.searchQuery = this.$route.params.query
+      } 
     }
   }
   </script>
