@@ -102,7 +102,7 @@ export default {
                     .then((res) => {
                         // console.log(res.data)
                         if (res.data.imdb_id !== null) {
-                            axios.get(`https://www.omdbapi.com/?apikey=271ab1b1&i=${res.data.imdb_id}`, { headers: { 'Accept': 'application/json' } })
+                            axios.get(`https://www.omdbapi.com/?apikey=faf7e5bb&i=${res.data.imdb_id}`, { headers: { 'Accept': 'application/json' } })
                             .then((res) => {
                                 np.push(res.data)
                                 // console.log(res.data)
@@ -142,7 +142,7 @@ export default {
                 axios.get(`https://api.themoviedb.org/3/movie/${res.data.results[0].id}?api_key=d1cb8307b2e2ea609451dc1aa7ac7996&language=en-US`, { "Accept": "application/json" })
                 
                 .then(result => {
-                    axios.get(`https://www.omdbapi.com/?apikey=271ab1b1&i=${result.data.imdb_id}`, { headers: { 'Accept': 'application/json' } })
+                    axios.get(`https://www.omdbapi.com/?apikey=faf7e5bb&i=${result.data.imdb_id}`, { headers: { 'Accept': 'application/json' } })
                     .then((resultA) => {
                         this.moviesNext = resultA.data
                         // console.log(resultA.data)
